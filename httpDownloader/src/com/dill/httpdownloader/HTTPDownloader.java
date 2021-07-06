@@ -40,18 +40,20 @@ public class HTTPDownloader {
 			System.out.print("Name of downloaded file (include extension): ");
 			String filenameOutput = scanner.nextLine();
 			
-			try {
+			
 				URL website = new URL(fileURL);
 				ReadableByteChannel rbc = Channels.newChannel(website.openStream());
 				FileOutputStream fos = new FileOutputStream(filenameOutput);
 				fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 				fos.close();
-			} catch (FileNotFoundException e) {
-				System.out.println("Invalid Filename");
-			}
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("Invalid Filename");
+			downloader();
+		}
 			
 			
-		} catch (MalformedURLException e) {
+		catch (MalformedURLException e) {
 			System.out.println("Invalid URL");
 			downloader();
 		}
